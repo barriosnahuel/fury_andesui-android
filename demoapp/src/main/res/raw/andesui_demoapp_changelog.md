@@ -2,7 +2,7 @@
 ## Added
 - What's New in the Andes app.
 - Andes app version to the action bar to easily check which version of the Andes library you're on.
-- Shortcut to the Andes Website in the home page of the Andes app as well as for each component showcase.
+- Shortcut to the Andes Website in the home page of the Andes app.
 - Basic README for the Andes app module.
 
 ## Changed
