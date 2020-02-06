@@ -79,7 +79,7 @@ dependencies {
      * It enables us to show the What's New which is in markdown format.
      * https://github.com/noties/Markwon
      */
-    implementation "io.noties.markwon:core:4.2.1"
+    implementation "io.noties.markwon:core:$markwonVersion"
 }
 
 /**

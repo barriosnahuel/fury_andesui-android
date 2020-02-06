@@ -54,23 +54,15 @@ class MessageShowcaseActivity : AppCompatActivity() {
 
         private fun initViews(): List<View> {
             val inflater = LayoutInflater.from(context)
-            val layoutMessages = inflater.inflate(R.layout.andesui_message_showcase, null, false) as ScrollView
+
+            val staticMessagesLayout = addStaticMessages(inflater)
+            val dynamicMessageLayout = addDynamicMessage(inflater)
+
+            return listOf(dynamicMessageLayout, staticMessagesLayout)
+        }
+
+        private fun addDynamicMessage(inflater: LayoutInflater): View {
             val layoutMessagesChange = inflater.inflate(R.layout.andesui_message_showcase_change, null, false) as ScrollView
-            val button = layoutMessages.findViewById<AndesButton>(R.id.button)
-
-            layoutMessages.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_message).setOnClickListener {
-                launchSpecs(it.context, AndesSpecs.MESSAGE)
-            }
-
-            button.setOnClickListener {
-                val message = layoutMessages.findViewById<AndesMessage>(R.id.message_loud)
-                val hour = System.currentTimeMillis().toString()
-                message.title = ("The current millis are: $hour")
-                message.hierarchy = (AndesMessageHierarchy.LOUD)
-                message.type = (AndesMessageType.SUCCESS)
-                message.isDismissable = false
-                message.body = "I insist. Current millis are: $hour"
-            }
 
             val hierarchySpinner: Spinner = layoutMessagesChange.findViewById(R.id.hierarchy_spinner)
             ArrayAdapter.createFromResource(
@@ -152,9 +144,31 @@ class MessageShowcaseActivity : AppCompatActivity() {
                     changeMessage.hideSecondaryAction()
                 }
 
-                 changeMessage.visibility = View.VISIBLE
+                changeMessage.visibility = View.VISIBLE
             }
-            return listOf<View>(layoutMessagesChange, layoutMessages)
+
+            return layoutMessagesChange
+        }
+
+        private fun addStaticMessages(inflater: LayoutInflater): View {
+            val layoutMessages = inflater.inflate(R.layout.andesui_message_showcase, null, false) as ScrollView
+            val button = layoutMessages.findViewById<AndesButton>(R.id.button)
+
+            layoutMessages.findViewById<AndesButton>(R.id.andesui_demoapp_andes_specs_message).setOnClickListener {
+                launchSpecs(it.context, AndesSpecs.MESSAGE)
+            }
+
+            button.setOnClickListener {
+                val message = layoutMessages.findViewById<AndesMessage>(R.id.message_loud)
+                val hour = System.currentTimeMillis().toString()
+                message.title = ("The current millis are: $hour")
+                message.hierarchy = (AndesMessageHierarchy.LOUD)
+                message.type = (AndesMessageType.SUCCESS)
+                message.isDismissable = false
+                message.body = "I insist. Current millis are: $hour"
+            }
+
+            return layoutMessages
         }
     }
 }
